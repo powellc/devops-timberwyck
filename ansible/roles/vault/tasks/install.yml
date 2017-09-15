@@ -1,0 +1,49 @@
+---
+- set_fact:
+    arch: linux_amd64
+  when: ansible_system == "Linux"
+
+- set_fact:
+    arch: darwin_amd64
+  when: ansible_system == "Darwin"
+
+- name: Downloads Package
+  get_url: >
+    url="{{ install.download_location}}/{{ app.version }}/{{ app.name }}_{{ app.version }}_{{ arch }}.zip"
+    dest="/tmp/{{ app.name }}_{{ app.version }}_{{ arch }}.zip"
+    mode=0755
+    validate_certs=no
+  become: no
+  tags:
+    - hashicorp
+    - vault
+    - install
+    - download
+
+- name: Unpacks to location
+  unarchive: >
+    src=/tmp/{{ app.name }}_{{ app.version }}_{{ arch }}.zip
+    dest={{ install.dir }}
+    copy=no
+    mode=755
+  become: yes
+  tags:
+    - hashicorp
+    - vault
+    - install
+    - unarchive
+
+- name: Fix permissions on files (Workaround while waiting for 2.0)
+  file: path={{ install.dir }}/{{ item }}
+    owner={{ app.file_owner | default('root') }}
+    group={{ app.file_group | default('staff') }}
+    mode=755
+  become: yes
+  with_items:
+    - "{{ install.file_list }}"
+  tags:
+    - hashicorp
+    - vault
+    - install
+    - workaround
+

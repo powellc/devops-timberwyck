@@ -1,0 +1,13 @@
+---
+app:
+  name: runalyze
+  version: v4.0.0
+
+install:
+  dir : /var/www/runalyze
+  download_location: https://github.com/Runalyze/Runalyze/releases/download
+
+db:
+  name: runalyze
+  user: runalyze
+  password: Z2sh4fFCEB 

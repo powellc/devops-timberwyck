@@ -1,0 +1,58 @@
+---
+- name: Install required packages for Runalyze
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - php5
+    - php5-zip 
+    - php5-curl 
+    - php5-mbstring 
+    - php5-intl 
+    - php-xml 
+    - php-gettext 
+    - libxml2 
+    - gettext 
+    - perl
+  tags:
+    - dependencies
+
+- name: Downloads Package
+  get_url: >
+    url="{{ install.download_location}}/{{ app.version }}/{{ app.name }}-{{ app.version }}.zip"
+    dest="/tmp/{{ app.name }}-{{ app.version }}.zip"
+    mode=0755
+    validate_certs=no
+  become: no
+  tags:
+    - runalyze
+    - install
+    - download
+
+- name: Unpacks to location
+  unarchive: >
+    src=/tmp/{{ app.name }}-{{ app.version }}.zip
+    dest={{ install.dir }}
+    copy=no
+    mode=755
+    owner=www-data
+  become: yes
+  tags:
+    - runalyze
+    - install
+    - unarchive
+
+- name: Ensure MySQL database exists
+  mysql_db: name={{ db.name }} state=present
+
+- name: Configure MySQL access
+  mysql_user: 
+    name={{ db.user }} 
+    password={{ db.password }} 
+    priv=*.*:ALL
+
+- name: Configure the Apache HTTP server for runalyze
+  template: src=etc_apache2_sites-available_runalyze.j2 dest=/etc/apache2/sites-available/{{ app.name }}.conf group=root owner=root
+
+- name: Enable runalyze site
+  command: a2ensite {{app.name}}.conf creates=/etc/apache2/sites-enabled/{{ app.name }}.conf
+  notify: Restart apache
+

@@ -1,0 +1,8 @@
+- name: "Ensure OwnCloud container is running"
+  docker:
+    name:  owncloud
+    image: owncloud
+    links:
+      - db:mysql
+    ports:
+      - 80:80

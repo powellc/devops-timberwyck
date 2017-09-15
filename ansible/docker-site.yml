@@ -1,0 +1,12 @@
+---
+# This is the top-level playbook that defines our entire infrastructure.
+
+- hosts: all
+  user: root
+  become: True
+  gather_facts: True
+
+  roles:
+    - docker
+    - docker-apps
+    - tarsnap

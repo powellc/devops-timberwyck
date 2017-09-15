@@ -1,0 +1,6 @@
+- name: "Ensure MariaDB container is running"
+  docker:
+    name: db
+    image: mariadb
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ lookup('vault', 'secret/sovereign/mysql-root').value }}"

@@ -1,0 +1,10 @@
+---
+app:
+  name: vault
+  version: 0.7.0
+
+install:
+  dir : /usr/local/bin
+  download_location: https://releases.hashicorp.com/vault
+  file_list:
+    - vault

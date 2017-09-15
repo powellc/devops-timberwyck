@@ -1,0 +1,13 @@
+---
+- name: Update apt cache
+  apt: update_cache=yes
+  tags:
+    - dependencies
+
+- name: Install necessities and nice-to-haves
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - python-pip
+
+- name: Ensure docker-py is installed
+  pip: name=docker-py state=present

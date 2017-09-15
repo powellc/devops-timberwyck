@@ -1,0 +1,9 @@
+---
+- name: Install required software
+  apt: name={{ item }} state=present
+  become: yes
+  with_items:
+    - mysql-server
+    - php5-mysql
+    - python-mysqldb
+

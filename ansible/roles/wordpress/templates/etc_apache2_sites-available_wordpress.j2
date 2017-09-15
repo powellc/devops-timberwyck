@@ -1,0 +1,36 @@
+#<VirtualHost _default_:443>
+#    ServerName {{ app.domain}}
+#    ServerNameAlias www.{{app.domain}}
+#    DocumentRoot /var/www/wordpress
+#
+#	ErrorLog ${APACHE_LOG_DIR}/error.log
+#	CustomLog ${APACHE_LOG_DIR}/access.log combined
+#
+#	SSLEngine on
+#	SSLCertificateFile	/etc/letsencrypt/live/run.onec.me/cert.pem
+#	SSLCertificateKeyFile /etc/letsencrypt/live/run.onec.me/privkey.pem
+#	SSLCertificateChainFile /etc/letsencrypt/live/run.onec.me/chain.pem
+#
+#	<FilesMatch "\.(cgi|shtml|phtml|php)$">
+#			SSLOptions +StdEnvVars
+#	</FilesMatch>
+#	<Directory /var/www/runalyze/web>
+#                     	AllowOverride All
+#			SSLOptions +StdEnvVars
+#	</Directory>
+#	BrowserMatch "MSIE [2-6]" \
+#			nokeepalive ssl-unclean-shutdown \
+#			downgrade-1.0 force-response-1.0
+#	# MSIE 7 and newer should be able to use keepalive
+#	BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+#
+#</VirtualHost>
+<VirtualHost *:80>
+    ServerName {{ app.domain}}
+    ServerNameAlias www.{{app.domain}}
+    DocumentRoot /var/www/wordpress
+    #Redirect permanent / https://www.{{ app.domain }}
+    
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

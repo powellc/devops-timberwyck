@@ -1,0 +1,20 @@
+---
+# This is the top-level playbook that defines our entire infrastructure.
+
+- hosts: all
+  user: root
+  become: True
+  gather_facts: True
+
+  roles:
+    - common
+    - mailserver
+    - webmail
+    - blog
+    - ircbouncer
+    - xmpp
+    - owncloud
+    - tarsnap
+    - mysql
+    - runalyze
+    - monitoring  # Monitoring role should be last. See roles/monitoring/README.md
