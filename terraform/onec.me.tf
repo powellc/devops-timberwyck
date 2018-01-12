@@ -16,6 +16,14 @@ resource "digitalocean_record" "git" {
    value = "${digitalocean_droplet.sovreign.ipv4_address}"
 }
 
+resource "digitalocean_record" "data" {
+   domain = "${digitalocean_domain.onec.name}"
+   type = "A"
+   name = "data"
+   value = "159.203.71.162"
+}
+
+
 resource "digitalocean_record" "autoconfig" {
    domain = "${digitalocean_domain.onec.name}"
    type = "A"
@@ -49,13 +57,6 @@ resource "digitalocean_record" "mail" {
    type = "A"
    name = "mail"
    value = "${digitalocean_droplet.sovreign.ipv4_address}"
-}
-
-resource "digitalocean_record" "MX-mail" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "MX"
-   priority = "10"
-   value = "mail.onec.me."
 }
 
 resource "digitalocean_record" "akepa" {
@@ -109,5 +110,12 @@ resource "digitalocean_record" "kestrel" {
    type = "A"
    name = "kestrel"
    value = "45.46.94.151"
+}
+
+resource "digitalocean_record" "protonmail-txt" {
+   domain = "${digitalocean_domain.onec.name}"
+   type = "TXT"
+   name = "@"
+   value = "protonmail-verification=a49b5124986a7fe5c3d38e850f36eb3e86ebd11b"
 }
 
