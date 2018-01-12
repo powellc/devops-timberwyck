@@ -119,3 +119,31 @@ resource "digitalocean_record" "protonmail-txt" {
    value = "protonmail-verification=a49b5124986a7fe5c3d38e850f36eb3e86ebd11b"
 }
 
+resource "digitalocean_record" "protonmail-mx" {
+   domain = "${digitalocean_domain.onec.name}"
+   type = "MX"
+   name = "@"
+   priority = "10"
+   value = "mail.protonmail.ch."
+}
+
+resource "digitalocean_record" "protonmail-spf" {
+   domain = "${digitalocean_domain.onec.name}"
+   type = "TXT"
+   name = "@"
+   value = "v=spf1 include:_spf.protonmail.ch mx ~all"
+}
+
+resource "digitalocean_record" "protonmail-dkim" {
+   domain = "${digitalocean_domain.onec.name}"
+   type = "TXT"
+   name = "protonmail._domainkey"
+   value = "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC9Bn93yKzk31i9JtwIC+71QAaHi5fqZx9JCRdEZcWZVZouzx70mG0/zUKejLzDyO5BRBdG9MjbPPU+JhgKJj1d2ekDLR0MtxibkRlDud6jc4UjypHruuKcqr9FTZCQFI8yMLVp3nKGl6GlQ+aOO5PD2keogoatULBp+cILm/8wjQIDAQAB"
+}
+
+resource "digitalocean_record" "protonmail-dmarc" {
+   domain = "${digitalocean_domain.onec.name}"
+   type = "TXT"
+   name = "_dmarc"
+   value = "v=DMARC1; p=none; rua=mailto:colin@onec.me"
+}
