@@ -43,6 +43,27 @@ resource "digitalocean_record" "news-unblink" {
    value = "${digitalocean_droplet.sovereign.ipv4_address}"
 }
 
+resource "digitalocean_record" "spf" {
+   domain = "${digitalocean_domain.unblink.name}"
+   type = "TXT"
+   name = "@"
+   value = "v=spf1 a include:unbl.ink ~all"
+}
+
+#resource "digitalocean_record" "dkim" {
+#   domain = "${digitalocean_domain.unblink.name}"
+#   type = "TXT"
+#   name = "default._domainkey.unbl.ink"
+#   value = "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyQYE7Y3saK9L/xGufGkeFxIQ2gGnU5napjYZSNHQ7KVQpptbupRKzr4CLTXKvBxE1yHniqDlnBP0k8QN3VaeVdV69+3+K1jwpImsakBrY+k06cD5ZCNT9RP1l2bBfmx3DWKbZ8ixnnZVKm6dzQuXR/V7C7pjG39OIvjk880f/MwIDAQAB"
+#}
+#
+#resource "digitalocean_record" "dmarc" {
+#   domain = "${digitalocean_domain.unblink.name}"
+#   type = "TXT"
+#   name = "_dmarc.unbl.ink"
+#   value = "v=DMARC1; p=none; rua=mailto:colin@unbl.ink"
+#}
+
 resource "digitalocean_record" "read-unblink" {
    domain = "${digitalocean_domain.unblink.name}"
    type = "A"

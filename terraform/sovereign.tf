@@ -7,7 +7,7 @@ resource "digitalocean_volume" "sovereign-storage" {
 
 resource "digitalocean_droplet" "sovereign" {
   image  = "debian-8-x64"
-  name   = "sovereign"
+  name   = "unbl.ink"
   region = "nyc1"
   size   = "1gb"
   resize_disk = "true"
