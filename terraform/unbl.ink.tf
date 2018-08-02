@@ -29,6 +29,13 @@ resource "digitalocean_record" "mail-unblink" {
    value = "${digitalocean_droplet.sovereign.ipv4_address}"
 }
 
+resource "digitalocean_record" "runalyze-unblink" {
+   domain = "${digitalocean_domain.unblink.name}"
+   type = "A"
+   name = "runalyze"
+   value = "${digitalocean_droplet.sovereign.ipv4_address}"
+}
+
 resource "digitalocean_record" "autoconfig-unblink" {
    domain = "${digitalocean_domain.unblink.name}"
    type = "A"
