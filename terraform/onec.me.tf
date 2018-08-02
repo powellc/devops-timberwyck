@@ -82,7 +82,7 @@ resource "digitalocean_record" "galah" {
    domain = "${digitalocean_domain.onec.name}"
    type = "A"
    name = "galah"
-   value = "45.46.94.151"
+   value = "72.224.177.108"
 }
 resource "digitalocean_record" "grackle" {
    domain = "${digitalocean_domain.onec.name}"
@@ -110,6 +110,13 @@ resource "digitalocean_record" "kestrel" {
    type = "A"
    name = "kestrel"
    value = "45.46.94.151"
+}
+
+resource "digitalocean_record" "keybase-onec" {
+   domain = "${digitalocean_domain.onec.name}"
+   type = "TXT"
+   name = "@"
+   value = "keybase-site-verification=hxUNVno7luYTBW-2gmvVBf77Onp_SA3NKWYyCcSvrTs"
 }
 
 resource "digitalocean_record" "protonmail-txt" {

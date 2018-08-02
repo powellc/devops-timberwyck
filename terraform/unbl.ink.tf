@@ -43,6 +43,13 @@ resource "digitalocean_record" "news-unblink" {
    value = "${digitalocean_droplet.sovereign.ipv4_address}"
 }
 
+resource "digitalocean_record" "keybase-unblink" {
+   domain = "${digitalocean_domain.unblink.name}"
+   type = "TXT"
+   name = "@"
+   value = "keybase-site-verification=VwL0aY-sNsum0d26tZy9UDH--GmNgjqBilte4S0y9pc"
+}
+
 resource "digitalocean_record" "spf" {
    domain = "${digitalocean_domain.unblink.name}"
    type = "TXT"
