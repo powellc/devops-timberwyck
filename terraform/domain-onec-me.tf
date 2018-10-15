@@ -9,49 +9,6 @@ resource "digitalocean_record" "www" {
    value = "${digitalocean_droplet.sovreign.ipv4_address}"
 }
 
-resource "digitalocean_record" "git" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "A"
-   name = "git"
-   value = "${digitalocean_droplet.sovreign.ipv4_address}"
-}
-
-resource "digitalocean_record" "data" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "A"
-   name = "data"
-   value = "159.203.71.162"
-}
-
-
-resource "digitalocean_record" "autoconfig" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "A"
-   name = "autoconfig"
-   value = "${digitalocean_droplet.sovreign.ipv4_address}"
-}
-
-resource "digitalocean_record" "znc" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "A"
-   name = "znc"
-   value = "${digitalocean_droplet.sovreign.ipv4_address}"
-}
-
-resource "digitalocean_record" "cloud" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "A"
-   name = "cloud"
-   value = "${digitalocean_droplet.sovreign.ipv4_address}"
-}
-
-resource "digitalocean_record" "chickadee" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "A"
-   name = "chickadee"
-   value = "${digitalocean_droplet.sovreign.ipv4_address}"
-}
-
 resource "digitalocean_record" "mail" {
    domain = "${digitalocean_domain.onec.name}"
    type = "A"
@@ -64,12 +21,6 @@ resource "digitalocean_record" "akepa" {
    type = "A"
    name = "akepa"
    value = "75.127.4.125"
-}
-resource "digitalocean_record" "run" {
-   domain = "${digitalocean_domain.onec.name}"
-   type = "A"
-   name = "run"
-   value = "${digitalocean_droplet.sovreign.ipv4_address}"
 }
 
 resource "digitalocean_record" "vault" {

@@ -1,3 +1,8 @@
+install:
+	pipenv install
+	pipenv shell `ansible-galaxy install aalaesar.install_nextcloud`
+	pipenv shell `ansible-galaxy install jaywink.letsencrypt`
+
 provision:
 	ansible-playbook -i ansible/hosts ansible/site.yml --limit sovereign
 
