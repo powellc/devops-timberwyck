@@ -1,0 +1,16 @@
+---
+- hosts: nextcloud_servers
+  roles:
+    - role: jaywink.letsencrypt
+      letsencrypt_email: colin@onec.me
+      letsencrypt_domain: unbl.ink
+      letsencrypt_pause_services:
+        - nginx
+    - role: aalaesar.install_nextcloud
+      nextcloud_trusted_domain:
+        - "unbl.ink"
+      nextcloud_tls_cert_method: "installed"
+      nextcloud_tls_cert: "/etc/letsencrypt/live/unbl.ink/fullchain.pem"
+      nextcloud_tls_cert_key: "/etc/letsencrypt/live/unbl.ink/privkey.pem"
+      nextcloud_db_backend: "pgsql"
+      nextcloud_websrv: "nginx"

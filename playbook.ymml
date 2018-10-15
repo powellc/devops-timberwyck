@@ -1,0 +1,4 @@
+- hosts: dnsserver
+  become: yes
+  roles:
+    - role: aalaesar.install_nextcloud
